@@ -1,0 +1,98 @@
+<div class="text-right">
+    <button class="" mat-raised-button color="primary" (click)="Onlogout()">
+        Logout
+    </button>
+    <button mat-raised-button color="warn" class="ml-3">
+        <a href="mailto:someone@example.com">ContactUs</a>
+    </button>
+
+</div>
+
+<div class="container mt-5">
+
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+
+            <form class="form" [formGroup]="postForm" (ngSubmit)="Onpostformsubmit()">
+
+                <div class="form-group">
+                    <label for="fname">First Name</label>
+                    <input type="text" class="form-control" formControlName="fname">
+                    <ng-container *ngIf="postForm.controls['fname'].touched && postForm.controls['fname'].invalid">
+                        <span *ngIf="postForm.controls['fname'].hasError('required')">
+                            content is required
+                        </span>
+                    </ng-container>
+                </div>
+
+                <div class="form-group">
+                    <label for="lname">Last Name</label>
+                    <input type="text" class="form-control" formControlName="lname">
+                    <ng-container *ngIf="postForm.controls['lname'].touched && postForm.controls['lname'].invalid">
+                        <span *ngIf="postForm.controls['lname'].hasError('required')">
+                            content is required
+                        </span>
+                    </ng-container>
+                </div>
+
+                <div class="form-group">
+                    <label for="user">User Name*</label>
+                    <input type="user" class="form-control" formControlName="user">
+                    <ng-container *ngIf="postForm.controls['user'].touched && postForm.controls['user'].invalid">
+                        <span *ngIf="postForm.controls['user'].hasError('required')">
+                            content is required
+                        </span>
+                    </ng-container>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="email">Email*</label>
+                    <input type="email" class="form-control" formControlName="email" id="email">
+                    <ng-container *ngIf="postForm.controls['email'].touched && postForm.controls['email'].invalid">
+                        <span *ngIf="postForm.controls['email'].hasError('required')">
+                            Email is required field.
+                        </span>
+                        <span *ngIf="postForm.controls['email'].hasError('pattern')">
+                            Email is required field.
+                        </span>
+                    </ng-container>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="Password">Password*</label>
+                    <input type="Password" class="form-control" formControlName="Password" id="Password">
+                    <ng-container
+                        *ngIf="postForm.controls['Password'].invalid && postForm.controls['Password'].touched">
+                        <p class="alert alert-danger" *ngIf="postForm.controls['Password'].hasError('required')">
+                            Password is Mandatory.
+                        </p>
+                        <p class="alert alert-danger" *ngIf="postForm.controls['Password'].hasError('pattern')">
+                            Password should be containe least 1 Capitalletter, one Lowercase letter, one Special char &
+                            one nu.
+                            Min length of Password should be 8.
+                        </p>
+                    </ng-container>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm password*</label>
+                    <input type="confirmPassword" class="form-control" formControlName="confirmPassword"
+                        id="confirmPassword">
+                    <ng-container *ngIf="postForm.controls['confirmPassword'].touched">
+                        <span class="alert alert-danger"
+                            *ngIf="postForm.controls['confirmPassword'].value != postForm.controls['Password'].value">
+                            Password & confirmPassword should be same
+                        </span>
+                    </ng-container>
+                </div>
+
+                <button class="btn btn-primary" [disabled]="!postForm.valid">Submit</button>
+                <button class="btn btn-warning ml-5" (click)="postForm.reset()" type="button">Reset</button>
+
+            </form>
+        </div>
+    </div>
+</div>
